@@ -1,0 +1,22 @@
+{
+  "name": "lambda-to-google-tts",
+  "version": "1.0.0",
+  "description": "Lambda to Google Text to Speech API",
+  "main": "index.js",
+  "author": "Gabe Wyatt <gabe@solarixdigital.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "sam build -t template.yaml",
+    "deploy": "sam deploy -t template.yaml --confirm-changeset",
+    "dev": "sam local start-api -t template.yaml",
+    "test": "mocha tests/unit/"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^2.6.0"
+  }
+}

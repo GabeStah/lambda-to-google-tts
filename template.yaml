@@ -1,0 +1,70 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  lambda-to-google-tts
+
+  SAM Template for lambda-to-google-tts
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Api:
+    # Allow CORS preflight request from any origin.
+    Cors:
+      AllowMethods: "'OPTIONS,POST,GET'"
+      AllowHeaders: "'Content-Type'"
+      AllowOrigin: "'*'"
+  Function:
+    MemorySize: 512
+    Tags:
+      Name: srn:sam:wcasg:widget::app/lambda-to-google-tts
+      srn: srn:sam:wcasg:widget::app/lambda-to-google-tts
+    # 10 second maximum execution time
+    Timeout: 10
+
+Resources:
+  # Standard TTS request
+  StandardFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: index.standard
+      Runtime: nodejs12.x
+      Events:
+        StandardEvent:
+          Type: Api
+          Properties:
+            Path: /standard
+            Method: post
+  # Get available voices list
+  VoicesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: index.voices
+      Runtime: nodejs12.x
+      Events:
+        VoicesEvent:
+          Type: Api
+          Properties:
+            Path: /voices
+            Method: post
+
+Outputs:
+  StandardApi:
+    Description: "API Gateway endpoint URL for Prod stage for Standard function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/standard/"
+  StandardFunction:
+    Description: "Standard Lambda Function ARN"
+    Value: !GetAtt StandardFunction.Arn
+  StandardFunctionIamRole:
+    Description: "Implicit IAM Role created for Standard function"
+    Value: !GetAtt StandardFunctionRole.Arn
+  VoicesApi:
+    Description: "API Gateway endpoint URL for Prod stage for Voices function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/voices/"
+  VoicesFunction:
+    Description: "Voices Lambda Function ARN"
+    Value: !GetAtt VoicesFunction.Arn
+  VoicesFunctionIamRole:
+    Description: "Implicit IAM Role created for Voices function"
+    Value: !GetAtt VoicesFunctionRole.Arn
