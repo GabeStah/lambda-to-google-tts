@@ -41,9 +41,9 @@ exports.handler = async(event, context) => {
     V2: { decrypt }
   } = paseto;
 
-  if (event.request && event.request.headers && event.request.headers['X-Wcasg-Widget-Tts-Request-Data']) {
+  if (event.request && event.request.headers && event.request.headers[process.env.TTS_REQUEST_HEADER]) {
     const decryptedData = await decrypt(
-      event.request.headers['X-Wcasg-Widget-Tts-Request-Data'],
+      event.request.headers[process.env.TTS_REQUEST_HEADER],
       Buffer.from(process.env.APP_PASETO_SECRET)
     );
 

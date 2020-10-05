@@ -17,7 +17,7 @@ Globals:
     # Allow CORS preflight request from any origin.
     Cors:
       AllowMethods: "'OPTIONS,POST,GET'"
-      AllowHeaders: "'Content-Type,X-Wcasg-Widget-TTS-Request-Data'"
+      AllowHeaders: "'Content-Type,x-wcasg-widget-tts-request-data'"
       AllowOrigin: "'*'"
   Function:
     Environment:
