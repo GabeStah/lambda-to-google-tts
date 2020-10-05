@@ -24,6 +24,8 @@ async function makeCoeusDataInsertRequest (payload) {
     return;
   }
 
+  console.log('Invoking srn-lambda-wcasg-widget-dashboard_coeus-insert-tts-request function.')
+
   return lambda.invoke({
     FunctionName: 'arn:aws:lambda:us-west-2:696585593443:function:srn-lambda-wcasg-widget-dashboard_coeus-insert-tts-request',
     InvocationType: 'Event',
@@ -35,6 +37,8 @@ async function makeCoeusDataInsertRequest (payload) {
 exports.standard = async (event, context, callback) => {
   const speech = await fetchSpeech(event.body);
   const response = JSON.stringify(await speech.json());
+
+  console.log(event);
 
   if (event.headers && event.headers['X-Wcasg-Widget-Tts-Request-Data']) {
     await makeCoeusDataInsertRequest( {
