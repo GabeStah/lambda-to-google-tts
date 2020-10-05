@@ -8,7 +8,8 @@
   "scripts": {
     "build": "sam build -t template.yaml",
     "deploy": "sam deploy -t template.yaml --confirm-changeset",
-    "dev": "sam local start-api -t template.yaml",
+    "dev": "sam local start-api -n env.json -t template.yaml",
+    "lambda": "sam local start-lambda --template template.yaml --port 3001 --region local",
     "test": "mocha tests/unit/"
   },
   "devDependencies": {
@@ -16,6 +17,7 @@
     "mocha": "^6.1.4"
   },
   "dependencies": {
+    "aws-sdk": "^2.761.0",
     "jsonwebtoken": "^8.5.1",
     "node-fetch": "^2.6.0"
   }

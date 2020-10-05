@@ -5,15 +5,24 @@ Description: >
 
   SAM Template for lambda-to-google-tts
 
+Parameters:
+  AppPasetoSecret:
+    Type: String
+    Description: "Secret used to decrypt tokens"
+    Default: ""
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Api:
     # Allow CORS preflight request from any origin.
     Cors:
       AllowMethods: "'OPTIONS,POST,GET'"
-      AllowHeaders: "'Content-Type'"
+      AllowHeaders: "'Content-Type,X-Wcasg-Widget-TTS-Request-Data'"
       AllowOrigin: "'*'"
   Function:
+    Environment:
+      Variables:
+        APP_PASETO_SECRET: !AppPasetoSecret
     MemorySize: 512
     Tags:
       Name: srn:sam:wcasg:widget::app/lambda-to-google-tts
