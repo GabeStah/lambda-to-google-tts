@@ -22,7 +22,7 @@ Globals:
   Function:
     Environment:
       Variables:
-        APP_PASETO_SECRET: !AppPasetoSecret
+        APP_PASETO_SECRET: !Ref AppPasetoSecret
     MemorySize: 512
     Tags:
       Name: srn:sam:wcasg:widget::app/lambda-to-google-tts
