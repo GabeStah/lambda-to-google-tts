@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Lambda to Google Text to Speech API",
   "main": "index.js",
-  "author": "Gabe Wyatt <gabe@solarixdigital.com>",
+  "author": "Gabe Wyatt <gabe@gabewyatt.com>",
   "license": "MIT",
   "scripts": {
     "build": "sam build -t template.yaml",
