@@ -131,3 +131,4 @@ $RECYCLE.BIN/
 /nodejs/
 /.aws-sam/
 /env.json
+/credentials/credentials.json
